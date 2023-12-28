@@ -24,18 +24,16 @@ export default async function (req: NextApiRequest, res: NextApiResponse<ApiResp
         const start = (page - 1) * recordsPerPage
         const end = start + recordsPerPage
 
-
-        if (environment === "development") {
-
+        if (environment === 'development') {
             const posts = dataBackendPost
             const paginatedPosts = posts.slice(start, end)
 
             const { quantity } = verifyData(posts)
 
-            return res.status(200).json({ status: true, data: { data: paginatedPosts, quantity }, message: 'Ok' })
+            res.status(200).json({ status: true, data: { data: paginatedPosts, quantity }, message: 'Ok' }); return
         }
 
-        if (environment === "production") {
+        if (environment === 'production') {
             await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts')
                 .then(response => {
                     const posts = response.data
