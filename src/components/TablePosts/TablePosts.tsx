@@ -29,9 +29,12 @@ const TablePosts = ({ maxPage, dataHead, children }: TablePostsProps) => {
                     </Table>
 
                 </TableContainer>
-                <TablePostFooter
-                    maxPage={maxPage}
-                />
+                {
+                    maxPage > 0 &&
+                    <TablePostFooter
+                        maxPage={maxPage}
+                    />
+                }
             </Stack>
         </Paper>
     )

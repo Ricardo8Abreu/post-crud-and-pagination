@@ -25,7 +25,7 @@ const useRender = () => {
 
     useEffect(() => {
         hasData && dispatch(setCurrentData(dataPost))
-    }, [hasData])
+    }, [data])
 
     return {
         error,

@@ -16,11 +16,9 @@ interface HomeProps {
 
 export default function Home ({ dataTableHead }: HomeProps) {
   const { handleEditPost, handleDeletePost } = useHandlePost()
-  const { dataPost, hasData, quantity, error, message, isLoading } = useRender()
+  const { dataPost, quantity, error, message, isLoading } = useRender()
 
-  if (isLoading) return <CustomAlerts.Loading message='Loading posts...' />
-  if (error || !quantity || !dataPost) return <CustomAlerts.Error message={message} />
-  if (!hasData) return <CustomAlerts.Empty message={message} />
+  if (error) return <CustomAlerts.Error message={message} />
 
   return (
     <Layout
@@ -29,15 +27,18 @@ export default function Home ({ dataTableHead }: HomeProps) {
     >
 
       <TablePosts
-        maxPage={quantity}
+        maxPage={quantity || 0}
         dataHead={dataTableHead}
       >
+
         <TablePostBody
           data={dataPost}
+          isLoading={isLoading}
           handleEdit={handleEditPost}
           handleDelete={handleDeletePost}
 
         />
+
       </TablePosts>
 
     </Layout>
