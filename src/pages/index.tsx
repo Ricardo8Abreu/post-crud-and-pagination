@@ -23,7 +23,7 @@ export default function Home ({ dataTableHead }: HomeProps) {
   return (
     <Layout
       title='CRUD Posts'
-      description='CRUD Posts for ev'
+      description='CRUD Posts for everyone'
     >
 
       <TablePosts
