@@ -37,7 +37,7 @@ const TablePostBody = ({ data, isLoading, handleEdit, handleDelete }: TablePostB
                         return (
                             <TableRow key={id}>
                                 <TableCell>{title}</TableCell>
-                                <TableCell>{body}</TableCell>
+                                <TableCell style={{ minWidth: '200px' }}>{body}</TableCell>
                                 <TableCell>
                                     <Editable
                                         handleEdit={() => { handleEdit({ id, title, body }) }}
