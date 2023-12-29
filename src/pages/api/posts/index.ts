@@ -1,10 +1,12 @@
-import { type Post, type ApiResponse } from '@/types/types'
-import verifyData from '@/utils/data/verifyData'
-
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { dataBackendPost } from '../../../../data'
 import axios from 'axios'
+
+import { dataBackendPost } from '../../../../data'
+
+import { type Post, type ApiResponse } from '@/types/types'
+
+import verifyData from '@/utils/data/verifyData'
 
 export interface ApiResponseGetPostsData {
     data: Post[] | null
@@ -12,7 +14,9 @@ export interface ApiResponseGetPostsData {
 }
 
 export type ApiResponseGetPosts = ApiResponse<ApiResponseGetPostsData>
+
 const environment = process.env.NODE_ENV
+// console.log('🚀 ~ file: index.ts:19 ~ environment:', environment)
 
 export default async function (req: NextApiRequest, res: NextApiResponse<ApiResponseGetPosts>) {
     try {
@@ -30,7 +34,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse<ApiResp
 
             const { quantity } = verifyData(posts)
 
-            res.status(200).json({ status: true, data: { data: paginatedPosts, quantity }, message: 'Ok' }); return
+            return res.status(200).json({ status: true, data: { data: paginatedPosts, quantity }, message: 'Ok' })
         }
 
         if (environment === 'production') {
@@ -41,15 +45,15 @@ export default async function (req: NextApiRequest, res: NextApiResponse<ApiResp
 
                     const { quantity } = verifyData(posts)
 
-                    res.status(200).json({ status: true, data: { data: paginatedPosts, quantity }, message: 'Ok' })
+                   return res.status(200).json({ status: true, data: { data: paginatedPosts, quantity }, message: 'Ok' })
                 })
                 .catch(error => {
                     console.error(error)
-                    res.status(500).json({ status: false, data: { data: null, quantity: null }, message: 'An error occurred while fetching posts' })
+                   return res.status(500).json({ status: false, data: { data: null, quantity: null }, message: 'An error occurred while fetching posts' })
                 })
         }
     } catch (error) {
         const newError = error as Error
-        res.status(500).json({ status: false, data: { data: null, quantity: null }, message: `An error occurred while fetching posts, ${newError.message}` })
+        return res.status(500).json({ status: false, data: { data: null, quantity: null }, message: `An error occurred while fetching posts, ${newError.message}` })
     }
 }
