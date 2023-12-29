@@ -1,4 +1,4 @@
-import { TablePagination } from '@mui/material'
+import { TablePagination, TableRow } from '@mui/material'
 
 import usePagination from '@/hooks/pagination/usePagination'
 
@@ -11,14 +11,16 @@ const TablePostPagination = ({ maxPage }: ButtonsPaginationProps) => {
     const { page, handleChangePage } = usePagination({ maxPage })
 
     return (
-        <TablePagination
-            page={page}
-            count={maxPage}
-            rowsPerPage={10}
-            onPageChange={handleChangePage}
-            rowsPerPageOptions={[10]}
-        // onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        <TableRow>
+            <TablePagination
+                page={page - 1}
+                count={maxPage}
+                rowsPerPage={10}
+                onPageChange={handleChangePage}
+                rowsPerPageOptions={[10]}
+            // onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+        </TableRow>
     )
 }
 

@@ -23,7 +23,7 @@ const usePagination = ({ maxPage }: UsePaginationParams) => {
         newPage: number
         ) => {
             // update the page number in the url
-            params.set('pagination', String(newPage || 1))
+            params.set('pagination', String(newPage + 1))
            void replace(`${pathName}?${params.toString()}`)
     }
 
