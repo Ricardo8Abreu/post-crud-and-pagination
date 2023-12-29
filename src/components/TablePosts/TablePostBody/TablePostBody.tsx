@@ -40,8 +40,8 @@ const TablePostBody = ({ data, isLoading, handleEdit, handleDelete }: TablePostB
                                 <TableCell style={{ minWidth: '200px' }}>{body}</TableCell>
                                 <TableCell>
                                     <Editable
-                                        handleEdit={() => { handleEdit({ id, title, body }) }}
-                                        handleDelete={() => { handleDelete({ id }) }}
+                                        handleEdit={() => handleEdit({ id, title, body }) }
+                                        handleDelete={async () => await handleDelete({ id }) }
                                     />
                                 </TableCell>
                             </TableRow>

@@ -11,7 +11,7 @@ type HandleEditArgs = Pick<Post, 'id' | 'title' | 'body'>
 type HandleDeleteArgs = Pick<Post, 'id'>
 
 type HandleEdit = (data: HandleEditArgs) => void
-type HandleDelete = (data: HandleDeleteArgs) => void
+type HandleDelete = (data: HandleDeleteArgs) => Promise<void>
 
 export type {
     Post,
